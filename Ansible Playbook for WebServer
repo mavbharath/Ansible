@@ -1,0 +1,39 @@
+- name: Deploy web server
+  hosts: webserver
+  become: yes
+
+  tasks:
+    - name: Copy the latest code to the webserver
+      copy:
+        src: "{{ lookup('file', 'dist/') }}"
+        dest: /var/www/myapp/
+        mode: 0644
+
+    - name: Restart Nginx to pick up the new code
+      service:
+        name: nginx
+        state: restarted
+
+    - name: Check the status of Nginx
+      shell: nginx -t
+      register: nginx_status
+      ignore_errors: yes
+
+    - name: Display the status of Nginx
+      debug:
+        var: nginx_status.stdout_lines
+
+    - name: Notify the deployer if the deployment fails
+      when: nginx_status.rc != 0
+      mail:
+        to: deployer@example.com
+        subject: Deployment failed
+        body: "Nginx failed to start. Check the logs for more details."
+        
+        
+This playbook performs the following tasks:
+
+1.Copies the latest code to the web server.
+2.Restarts the Nginx service to pick up the new code.
+3.Checks the status of Nginx to ensure that it is running correctly.
+4.Sends an email notification to the deployer if the deployment fails.
