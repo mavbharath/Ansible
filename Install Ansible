@@ -1,0 +1,26 @@
+
+To install ansible (Ubuntu)
+
+Establish a passwordless connection
+ssh-keygen -t rsa (optional)
+
+use ssh-copy-id username@remote_host (optional) or manually paste
+
+sudo apt update
+
+sudo apt install ansible
+
+
+To setup inventory file
+
+$ sudo nano /etc/ansible/hosts
+
+
+To check ansible inventory
+ansible-inventory --list -y
+
+
+To test connection to host
+
+ansible all -m ping
+
