@@ -1,0 +1,4 @@
+Incorrect hostname/IP address: If the hostname or IP address specified in the Ansible inventory is incorrect, Ansible will not be able to reach the target host.
+Network connectivity issues: If there is a network issue preventing the Ansible control machine from reaching the target host, the "ansible ping" command will return an error.
+Firewall restrictions: If the firewall on the target host is blocking incoming connections from the Ansible control machine, the "ansible ping" command will fail.
+SSH connectivity issues: If the target host is not configured to accept incoming SSH connections or if the SSH key or password specified in the Ansible playbook is incorrect, the "ansible ping" command will fail.
