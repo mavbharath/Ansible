@@ -1,0 +1,27 @@
+- name: Install required packages
+  hosts: all
+  become: yes
+  tasks:
+  - name: Install Java on Ubuntu
+    when: "'Ubuntu' in ansible_facts['distribution']"
+    apt: name=openjdk-8-jdk state=present
+
+  - name: Install Git on Ubuntu
+    when: "'Ubuntu' in ansible_facts['distribution']"
+    apt: name=git state=present
+
+  - name: Install wget on Ubuntu
+    when: "'Ubuntu' in ansible_facts['distribution']"
+    apt: name=wget state=present
+
+  - name: Install curl on Red Hat
+    when: "'Red Hat' in ansible_facts['distribution']"
+    yum: name=curl state=present
+
+  - name: Install Python on Red Hat
+    when: "'Red Hat' in ansible_facts['distribution']"
+    yum: name=python state=present
+
+  - name: Install Tomcat on Red Hat
+    when: "'Red Hat' in ansible_facts['distribution']"
+    yum: name=tomcat state=present
